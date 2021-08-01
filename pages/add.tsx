@@ -17,6 +17,8 @@ import {
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
+const years = Array.from({ length: dayjs().year() - 2020 + 1 }, (_, i: number) => 2020 + i).reverse();
+
 export default function Add() {
   const [year, setYear] = useState<string>('');
   const [gender, setGender] = useState<string>('');
@@ -46,13 +48,11 @@ export default function Add() {
               setYear(event.target.value);
             }}
           >
-            {Array.from({ length: dayjs().year() - 2020 + 1 }, (_, i: number) => 2020 + i)
-              .reverse()
-              .map((year: number) => (
-                <option value={`${year}`} key={year}>
-                  {year}届
-                </option>
-              ))}
+            {years.map((year: number) => (
+              <option value={`${year}`} key={year}>
+                {year}届
+              </option>
+            ))}
           </Select>
           <InputGroup>
             <NumberInput>
