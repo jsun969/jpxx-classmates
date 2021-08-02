@@ -1,8 +1,33 @@
 import Head from 'next/head';
-import { Input, Heading, Flex, Center, Alert, AlertIcon, Text, Stack } from '@chakra-ui/react';
+import { Input, Heading, Center, Alert, AlertIcon, Text, Stack } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import StudentCard from '../components/StudentCard';
+import { PrismaClient } from '@prisma/client';
 
-export default function Home() {
+const prisma = new PrismaClient();
+
+type StudentBase = { id: string; name: string; gender: boolean; year: number; class: number; school: string };
+
+export async function getStaticProps() {
+  const students: StudentBase[] = await prisma.student.findMany({
+    where: { status: true },
+    select: {
+      id: true,
+      name: true,
+      gender: true,
+      year: true,
+      class: true,
+      school: true,
+    },
+  });
+  return {
+    props: {
+      students,
+    },
+  };
+}
+
+export default function Home({ students }: { students: StudentBase[] }) {
   return (
     <>
       <Head>
@@ -24,8 +49,10 @@ export default function Home() {
           </Alert>
           <Input placeholder="搜索 (姓名/学校)" />
         </Stack>
+        {students.map(({ id, name, gender, year, school, class: _class }) => (
+          <StudentCard key={id} name={name} gender={gender} year={year} school={school} _class={_class} />
+        ))}
       </main>
-      <footer></footer>
     </>
   );
 }
