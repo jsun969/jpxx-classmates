@@ -2,9 +2,7 @@ import Head from 'next/head';
 import { Input, Heading, Center, Alert, AlertIcon, Text, Stack } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import StudentCard from '../components/StudentCard';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma';
 
 type StudentBase = { id: string; name: string; gender: boolean; year: number; class: number; school: string };
 
