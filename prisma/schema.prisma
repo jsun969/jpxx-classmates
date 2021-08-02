@@ -17,6 +17,7 @@ model Student {
   gender    Boolean
   year      Int
   class     Int
+  school    String
   qq        String
   wechat    String
   content   String
