@@ -11,6 +11,7 @@ type StudentBase = { id: string; name: string; gender: boolean; year: number; cl
 export async function getStaticProps() {
   const students: StudentBase[] = await prisma.student.findMany({
     where: { status: true },
+    orderBy: { createdAt: 'desc' },
     select: {
       id: true,
       name: true,
