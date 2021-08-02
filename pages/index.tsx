@@ -33,7 +33,7 @@ export default function Home({ students }: { students: StudentBase[] }) {
         <title>建西同学录</title>
       </Head>
       <main>
-        <Stack backgroundColor="gray.100" p={5} spacing={3} style={{ position: 'sticky', top: 0 }}>
+        <Stack backgroundColor="gray.100" p={5} spacing={3} pos="sticky" top={0} zIndex={233}>
           <Center>
             <Heading my={3} size="lg">
               建平西校同学录
