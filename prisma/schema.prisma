@@ -18,8 +18,8 @@ model Student {
   year      Int
   class     Int
   school    String
-  qq        String
-  wechat    String
-  content   String
+  qq        String?
+  wechat    String?
+  content   String?
   status    Boolean  @default(false)
 }
