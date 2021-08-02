@@ -13,9 +13,11 @@ import {
   NumberInput,
   NumberInputField,
   Button,
+  useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import dayjs from 'dayjs';
+import server from '../lib/axios';
 
 const years = Array.from({ length: dayjs().year() - 2020 + 1 }, (_, i: number) => 2020 + i).reverse();
 
@@ -28,6 +30,40 @@ export default function Add() {
   const [qq, setQQ] = useState<string>('');
   const [wechat, setWechat] = useState<string>('');
   const [content, setContent] = useState<string>('');
+
+  const [loading, toggleLoading] = useState<boolean>(false);
+
+  const toast = useToast();
+
+  const handleSubmit = async () => {
+    try {
+      toggleLoading(true);
+      const { status } = await server.post('/student', {
+        name,
+        gender: gender === 'girl',
+        year: +year,
+        class: _class,
+        school,
+        qq,
+        wechat,
+        content,
+      });
+      if (status === 201) {
+        toast({
+          title: '提交成功',
+          description: '将在24小时内审核通过后展示',
+          status: 'success',
+        });
+        toggleLoading(false);
+      }
+    } catch (error) {
+      toast({
+        title: '提交失败',
+        description: '服务器错误',
+        status: 'error',
+      });
+    }
+  };
 
   return (
     <>
@@ -115,11 +151,11 @@ export default function Add() {
             }}
           />
           <Button
+            isLoading={loading}
+            loadingText="提交中"
             colorScheme="blue"
-            onClick={() => {
-              console.table({ name, gender, year, class: _class, school, qq, wechat, content });
-            }}
-            disabled={!name || !gender || !year || !_class || !school}
+            onClick={handleSubmit}
+            disabled={!name || !gender || !year || !_class || !school || loading}
           >
             登记
           </Button>
