@@ -16,7 +16,15 @@ export default function StudentCard({
   school: string;
 }) {
   return (
-    <LinkBox as="article" p={5} borderWidth="1px" rounded="md" m={5} borderColor={gender ? 'pink.50' : 'blue.50'}>
+    <LinkBox
+      as="article"
+      p={5}
+      borderWidth="2px"
+      rounded="md"
+      m={5}
+      boxShadow="lg"
+      borderColor={gender ? 'pink.50' : 'blue.50'}
+    >
       <Heading>{name}</Heading>
       <Text>{school}</Text>
       <Text align="end" color="gray.400">
