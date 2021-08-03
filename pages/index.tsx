@@ -3,11 +3,12 @@ import { Input, Heading, Center, Alert, AlertIcon, Text, Stack } from '@chakra-u
 import NextLink from 'next/link';
 import StudentCard from '../components/StudentCard';
 import prisma from '../lib/prisma';
+import { useState } from 'react';
 
 type StudentBase = { id: string; name: string; gender: boolean; year: number; class: number; school: string };
 
 export async function getStaticProps() {
-  const students: StudentBase[] = await prisma.student.findMany({
+  const studentsTotal: StudentBase[] = await prisma.student.findMany({
     where: { status: true },
     orderBy: { createdAt: 'desc' },
     select: {
@@ -21,12 +22,14 @@ export async function getStaticProps() {
   });
   return {
     props: {
-      students,
+      studentsTotal,
     },
   };
 }
 
-export default function Home({ students }: { students: StudentBase[] }) {
+export default function Home({ studentsTotal }: { studentsTotal: StudentBase[] }) {
+  const [students, setStudents] = useState<StudentBase[]>(studentsTotal);
+
   return (
     <>
       <Head>
@@ -46,7 +49,19 @@ export default function Home({ students }: { students: StudentBase[] }) {
               <NextLink href="/add">点此登记</NextLink>
             </Text>
           </Alert>
-          <Input placeholder="搜索 (姓名/学校)" />
+          <Input
+            placeholder="搜索 (姓名/学校/xx届xx班)"
+            onChange={(event) => {
+              setStudents(
+                studentsTotal.filter(
+                  ({ name, school, year, class: _class }) =>
+                    name.includes(event.target.value) ||
+                    school.includes(event.target.value) ||
+                    `${year}届${_class}班`.includes(event.target.value)
+                )
+              );
+            }}
+          />
         </Stack>
         {students.map(({ id, name, gender, year, school, class: _class }) => (
           <StudentCard key={id} id={id} name={name} gender={gender} year={year} school={school} _class={_class} />
