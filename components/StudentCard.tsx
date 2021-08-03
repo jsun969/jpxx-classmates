@@ -1,14 +1,15 @@
-import { LinkBox, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Text, Flex, Spacer } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
 export default function StudentCard({
-  key,
+  id,
   name,
   gender,
   year,
   _class,
   school,
 }: {
-  key: string;
+  id: string;
   name: string;
   gender: boolean;
   year: number;
@@ -16,20 +17,18 @@ export default function StudentCard({
   school: string;
 }) {
   return (
-    <LinkBox
-      as="article"
-      p={5}
-      borderWidth="2px"
-      rounded="md"
-      m={5}
-      boxShadow="lg"
-      borderColor={gender ? 'pink.50' : 'blue.50'}
-    >
+    <Box as="article" p={5} borderWidth="2px" rounded="md" m={5} boxShadow="lg" borderColor={gender ? 'pink.50' : 'blue.50'}>
       <Heading>{name}</Heading>
       <Text>{school}</Text>
-      <Text align="end" color="gray.400">
-        {year}届{_class}班
-      </Text>
-    </LinkBox>
+      <Flex mt={3}>
+        <Text color="cyan.500">
+          <NextLink href={`/student/${id}`}>查看更多</NextLink>
+        </Text>
+        <Spacer />
+        <Text color="gray.400">
+          {year}届{_class}班
+        </Text>
+      </Flex>
+    </Box>
   );
 }

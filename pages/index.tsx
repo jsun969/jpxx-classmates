@@ -49,7 +49,7 @@ export default function Home({ students }: { students: StudentBase[] }) {
           <Input placeholder="搜索 (姓名/学校)" />
         </Stack>
         {students.map(({ id, name, gender, year, school, class: _class }) => (
-          <StudentCard key={id} name={name} gender={gender} year={year} school={school} _class={_class} />
+          <StudentCard key={id} id={id} name={name} gender={gender} year={year} school={school} _class={_class} />
         ))}
       </main>
     </>
