@@ -42,6 +42,10 @@ export default function Home({ studentsTotal }: { studentsTotal: StudentBase[] }
               建平西校同学录
             </Heading>
           </Center>
+          <Alert status="warning" my={3}>
+            <AlertIcon />
+            如遇问题, 请联系QQ1351083056
+          </Alert>
           <Alert status="info" my={3}>
             <AlertIcon />
             没有你的信息?
