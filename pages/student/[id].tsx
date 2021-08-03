@@ -73,17 +73,21 @@ export default function StudentInfo({ student }: { student: StudentInfo | null }
                   <Td>就读高中</Td>
                   <Td isNumeric>{student?.school}</Td>
                 </Tr>
-                {student?.qq && (
+                {student?.qq ? (
                   <Tr>
                     <Td>QQ</Td>
                     <Td isNumeric>{student?.qq}</Td>
                   </Tr>
+                ) : (
+                  <Tr></Tr>
                 )}
-                {student?.wechat && (
+                {student?.wechat ? (
                   <Tr>
                     <Td>微信</Td>
                     <Td isNumeric>{student?.wechat}</Td>
                   </Tr>
+                ) : (
+                  <Tr></Tr>
                 )}
               </Tbody>
             </Table>
