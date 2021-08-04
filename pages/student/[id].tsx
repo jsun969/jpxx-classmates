@@ -2,6 +2,7 @@ import { Table, Tbody, Tr, Td, Box, Text, Heading } from '@chakra-ui/react';
 import { GetStaticPropsContext } from 'next';
 import prisma from '../../lib/prisma';
 import Head from 'next/head';
+import GithubCorner from '../../components/GithubCorner';
 
 type StudentInfo = {
   name: string;
@@ -48,6 +49,7 @@ export default function StudentInfo({ student }: { student: StudentInfo | null }
       <Head>
         <title>建西同学录 - {student ? student?.name : '查询中...'}</title>
       </Head>
+      <GithubCorner />
       <Box m={8}>
         {student ? (
           <>

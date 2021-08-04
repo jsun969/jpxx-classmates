@@ -4,6 +4,7 @@ import NextLink from 'next/link';
 import StudentCard from '../components/StudentCard';
 import prisma from '../lib/prisma';
 import { useState } from 'react';
+import GithubCorner from '../components/GithubCorner';
 
 type StudentBase = { id: string; name: string; gender: boolean; year: number; class: number; school: string };
 
@@ -35,6 +36,7 @@ export default function Home({ studentsTotal }: { studentsTotal: StudentBase[] }
       <Head>
         <title>建西同学录</title>
       </Head>
+      <GithubCorner />
       <main>
         <Stack backgroundColor="gray.100" p={5} spacing={3} pos="sticky" top={0} zIndex={233}>
           <Center>

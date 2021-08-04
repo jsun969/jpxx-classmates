@@ -18,6 +18,7 @@ import {
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import server from '../lib/axios';
+import GithubCorner from '../components/GithubCorner';
 
 const years = Array.from({ length: dayjs().year() - 2020 + 1 }, (_, i: number) => 2020 + i).reverse();
 
@@ -70,6 +71,7 @@ export default function Add() {
       <Head>
         <title>建西同学录 - 登记</title>
       </Head>
+      <GithubCorner />
       <Flex alignItems="center" justifyContent="center" height="100vh">
         <Stack backgroundColor="gray.100" p={5} spacing={3}>
           <Input
