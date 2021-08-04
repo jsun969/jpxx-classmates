@@ -35,4 +35,6 @@ yarn-error.log*
 
 # prisma
 .env
-/prisma/migrations
+
+# sqlite
+*.db
