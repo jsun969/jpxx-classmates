@@ -90,6 +90,7 @@ export default function Admin({ students }: { students: Student[] }) {
             <Flex alignItems="center" justifyContent="center" height="100vh">
               <Stack backgroundColor="gray.100" p={5} spacing={3}>
                 <Input
+                  type="password"
                   placeholder="管理员KEY"
                   value={loginKey}
                   onChange={(event) => {
