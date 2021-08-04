@@ -16,7 +16,7 @@ type Student = {
   status: boolean;
 };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const students: Student[] = await prisma.student.findMany({
     orderBy: { createdAt: 'desc' },
     select: {

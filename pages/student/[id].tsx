@@ -1,5 +1,5 @@
 import { Table, Tbody, Tr, Td, Box, Text, Heading } from '@chakra-ui/react';
-import { GetStaticPropsContext } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import prisma from '../../lib/prisma';
 import Head from 'next/head';
 import GithubCorner from '../../components/GithubCorner';
@@ -15,14 +15,7 @@ type StudentInfo = {
   content: string | null;
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [{ params: { id: 'id' } }],
-    fallback: true,
-  };
-}
-
-export async function getStaticProps(context: GetStaticPropsContext) {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
   const student: StudentInfo | null = await prisma.student.findFirst({
     where: { id: context.params?.id as string, status: true },
     select: {
