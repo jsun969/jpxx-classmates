@@ -8,7 +8,7 @@ import GithubCorner from '../components/GithubCorner';
 
 type StudentBase = { id: string; name: string; gender: boolean; year: number; class: number; school: string };
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const studentsTotal: StudentBase[] = await prisma.student.findMany({
     where: { status: true },
     orderBy: { createdAt: 'desc' },
